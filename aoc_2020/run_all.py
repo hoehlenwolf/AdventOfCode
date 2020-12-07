@@ -10,10 +10,8 @@ if platform == "win32":
     _PYTHON = "python"
 else:  # otherwise
     _PYTHON = "python3"
-# current folder in which this file resides
-_CURR_DIR = Path(dirname(realpath(__file__)))
 # file where combined outputs of all days will be written
-_OUTPUTS = _CURR_DIR / Path("Outputs.txt")
+_OUTPUTS = Path("Outputs.txt")
 # Variables for printout and logging
 per_day_output = True  # if for each day there should be a dayXX_output.txt
 printout = True  # if printout in console is wanted
@@ -21,11 +19,11 @@ summarized_output = True  # if there should be Outputs.txt for combined Output o
 # Number of iterations for constructing average runtime
 ITERATIONS = 10
 # Folder in which the output should be stored into
-_OUTPUT_FOLDER = _CURR_DIR / Path("outputs")
+_OUTPUT_FOLDER = Path(dirname(realpath(__file__))) / Path("outputs")
 # create if doesn't exist yet
 Path(_OUTPUT_FOLDER).mkdir(exist_ok=True)
 # folder in which code files for each day are stored
-_CODE_FOLDER = _CURR_DIR / Path("code")
+_CODE_FOLDER = Path(dirname(realpath(__file__))) / Path("code")
 # create that code folder if doesn't exist yet
 Path(_CODE_FOLDER).mkdir(exist_ok=True)
 

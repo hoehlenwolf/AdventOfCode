@@ -41,7 +41,7 @@ def run_all():
         # log only on first iteration (save outputs of days)
         logging = (i == 0)
         # create names day01 .. day25
-        for x in range(1, 25):
+        for x in range(1, 26):
             x_str = str(x)
             if x < 10:
                 x_str = "0" + x_str
