@@ -1,6 +1,6 @@
 from os.path import dirname, realpath
 from pathlib import Path
-_DAY = "XX"
+_DAY = "01"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
 with open(_INPUT_PATH, 'r') as f:

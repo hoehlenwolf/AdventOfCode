@@ -11,11 +11,11 @@ if platform == "win32":
 else:  # otherwise
     _PYTHON = "python3"
 # file where combined outputs of all days will be written
-_OUTPUTS = "_Outputs.txt"
+_OUTPUTS = Path("Outputs.txt")
 # Variables for printout and logging
 per_day_output = True  # if for each day there should be a dayXX_output.txt
 printout = True  # if printout in console is wanted
-summarized_output = True  # if there should be _Outputs.txt for combined Output of all days
+summarized_output = True  # if there should be Outputs.txt for combined Output of all days
 # Number of iterations for constructing average runtime
 ITERATIONS = 10
 # Folder in which the output should be stored into
@@ -88,7 +88,7 @@ def log(text: str, name: str = None):
             f.write(file_log_text)
 
     if summarized_output:
-        with open(Path("_Outputs.txt"), "a+") as f:
+        with open(_OUTPUTS, "a+") as f:
             f.write(file_log_text)
 
 

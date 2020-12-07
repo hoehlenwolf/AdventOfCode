@@ -1,0 +1,8 @@
+---------- Day 01 ----------
+Part A: None
+Part B: None
+----------------------------
+-----------------runtime duration-----------------
+Day 01: 0.048 seconds
+--------------------------------------------------
+Total execution time: 0.048 seconds on average
