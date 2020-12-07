@@ -23,16 +23,16 @@ Part A: 6443
 Part B: 3232
 ----------------------------
 ---------- Day 07 ----------
-Part A: None
-Part B: None
+Part A: 179
+Part B: 18925
 ----------------------------
 -----------------runtime duration-----------------
-Day 01: 0.280 seconds
-Day 02: 0.051 seconds
+Day 01: 0.286 seconds
+Day 02: 0.053 seconds
 Day 03: 0.049 seconds
-Day 04: 0.050 seconds
-Day 05: 0.052 seconds
-Day 06: 0.052 seconds
-Day 07: 0.048 seconds
+Day 04: 0.051 seconds
+Day 05: 0.054 seconds
+Day 06: 0.054 seconds
+Day 07: 0.103 seconds
 --------------------------------------------------
-Total execution time: 0.581 seconds on average
+Total execution time: 0.649 seconds on average
