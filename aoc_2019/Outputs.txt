@@ -1,0 +1,128 @@
+---------- Day 01 ----------
+Part A: 3402634
+Part B: 5101069
+----------------------------
+---------- Day 02 ----------
+Part A: 5434663
+Part B: 4559
+----------------------------
+---------- Day 03 ----------
+Part A: 352          at (-140, 212)
+Part B: 43848        at (-354, -424)
+----------------------------
+---------- Day 04 ----------
+Part A: 945
+Part B: 617
+----------------------------
+---------- Day 05 ----------
+Part A: [11933517]
+Part B: [10428568]
+----------------------------
+---------- Day 06 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 07 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 08 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 09 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 10 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 11 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 12 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 13 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 14 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 15 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 16 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 17 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 18 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 19 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 20 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 21 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 22 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 23 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 24 ----------
+Part A: None
+Part B: None
+----------------------------
+---------- Day 25 ----------
+Part A: None
+Part B: None
+----------------------------
+-----------------runtime duration-----------------
+Day 01: 0.051 seconds
+Day 02: 0.364 seconds
+Day 03: 1.572 seconds
+Day 04: 0.592 seconds
+Day 05: 0.055 seconds
+Day 06: 0.054 seconds
+Day 07: 0.053 seconds
+Day 08: 0.051 seconds
+Day 09: 0.052 seconds
+Day 10: 0.053 seconds
+Day 11: 0.052 seconds
+Day 12: 0.052 seconds
+Day 13: 0.054 seconds
+Day 14: 0.056 seconds
+Day 15: 0.053 seconds
+Day 16: 0.052 seconds
+Day 17: 0.052 seconds
+Day 18: 0.052 seconds
+Day 19: 0.053 seconds
+Day 20: 0.052 seconds
+Day 21: 0.052 seconds
+Day 22: 0.053 seconds
+Day 23: 0.052 seconds
+Day 24: 0.052 seconds
+Day 25: 0.053 seconds
+--------------------------------------------------
+Total execution time: 3.685 seconds on average

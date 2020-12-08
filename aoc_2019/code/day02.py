@@ -14,8 +14,10 @@ with open(_INPUT_PATH, 'r') as f:
 def part_a():
     """Part A"""
     oc = OpcodeComputer(lines)
-    oc.set_value_at_addr(1, 12)
-    oc.set_value_at_addr(2, 2)
+    # set value at *Position* to `value` with mode being 1 because argument 1 is an address that needs to be
+    # written to in immediate mode
+    oc.set_value(1, 12,1)
+    oc.set_value(2, 2,1)
     oc.run()
     return oc.get_memory()[0]
 
@@ -26,8 +28,10 @@ def part_b():
     oc = OpcodeComputer(lines)
     for noun in range(0, 100):
         for verb in range(0, 100):
-            oc.set_value_at_addr(1, noun)
-            oc.set_value_at_addr(2, verb)
+            # set value at *Position* to `value` with mode being 1 because argument 1 is an address that needs to be
+            # written to in immediate mode
+            oc.set_value(1, noun, 1)
+            oc.set_value(2, verb, 1)
             oc.run()
             # if target reached
             if target == oc.get_memory()[0]:
