@@ -17,3 +17,33 @@ Day       Time   Rank  Score       Time   Rank  Score
   2   00:08:13   1731      0   00:20:07   3065      0
   1   00:50:03   5485      0   01:46:34   7290      0
 ```
+# Runtime Durations
+```bash
+Day 01: 0.287 seconds     ####################
+Day 02: 0.053 seconds     ###
+Day 03: 0.051 seconds     ###
+Day 04: 0.052 seconds     ###
+Day 05: 0.055 seconds     ###
+Day 06: 0.054 seconds     ###
+Day 07: 0.104 seconds     #######
+Day 08: 0.156 seconds     ##########
+Day 09: 0.050 seconds     ###
+Day 10: 0.051 seconds     ###
+Day 11: 0.049 seconds     ###
+Day 12: 0.050 seconds     ###
+Day 13: 0.051 seconds     ###
+Day 14: 0.050 seconds     ###
+Day 15: 0.049 seconds     ###
+Day 16: 0.049 seconds     ###
+Day 17: 0.050 seconds     ###
+Day 18: 0.050 seconds     ###
+Day 19: 0.049 seconds     ###
+Day 20: 0.049 seconds     ###
+Day 21: 0.049 seconds     ###
+Day 22: 0.049 seconds     ###
+Day 23: 0.050 seconds     ###
+Day 24: 0.049 seconds     ###
+Day 25: 0.049 seconds     ###
+--------------------------------------------------
+Total execution time: 1.656 seconds on average
+```
