@@ -1,37 +1,49 @@
 import subprocess
 from os.path import isfile, dirname, realpath
 from os import remove
-from sys import platform
+from sys import platform, argv
 import time
 from pathlib import Path
+from math import floor
 
 # if on windows
 if platform == "win32":
     _PYTHON = "python"
 else:  # otherwise
     _PYTHON = "python3"
-# current folder in which this file resides
-_CURR_DIR = Path(dirname(realpath(__file__)))
-# file where combined outputs of all days will be written
-_OUTPUTS = _CURR_DIR / Path("Outputs.txt")
 # Variables for printout and logging
 per_day_output = True  # if for each day there should be a dayXX_output.txt
 printout = True  # if printout in console is wanted
 summarized_output = True  # if there should be Outputs.txt for combined Output of all days
 # Number of iterations for constructing average runtime
 ITERATIONS = 10
-# Folder in which the output should be stored into
-_OUTPUT_FOLDER = _CURR_DIR / Path("outputs")
-# create if doesn't exist yet
-Path(_OUTPUT_FOLDER).mkdir(exist_ok=True)
-# folder in which code files for each day are stored
-_CODE_FOLDER = _CURR_DIR / Path("code")
-# create that code folder if doesn't exist yet
-Path(_CODE_FOLDER).mkdir(exist_ok=True)
+# Number of max Hashtags per day for visualization of runtime durations
+_MAX_NUM_HASHTAGS_PER_DAY = 20
+# Years that can be run
+_MIN_YEAR = 2015
+_MAX_YEAR = 2020
+# global variables for folder structure, set in run_all
+_YEAR_FOLDER = None
+_OUTPUTS = None
+_OUTPUT_FOLDER = None
+_CODE_FOLDER = None
 
-
-def run_all():
-    """Runs all existing dayXX_template.py in current directory"""
+def run_all(year : int):
+    global YEAR_FOLDER, _OUTPUTS, _OUTPUT_FOLDER, _CODE_FOLDER
+    """Runs all existing dayXX_template.py for specified year"""
+    # Folder that contains all the years
+    _YEAR_FOLDER = Path(dirname(realpath(__file__))) / Path("aoc_" + str(year))
+    # file where combined outputs of all days will be written
+    _OUTPUTS = _YEAR_FOLDER / Path("Outputs.txt")
+    # Folder in which the output should be stored into
+    _OUTPUT_FOLDER = _YEAR_FOLDER / Path("outputs")
+    # create if doesn't exist yet
+    Path(_OUTPUT_FOLDER).mkdir(exist_ok=True)
+    # folder in which code files for each day are stored
+    _CODE_FOLDER = _YEAR_FOLDER / Path("code")
+    # create that code folder if doesn't exist yet
+    Path(_CODE_FOLDER).mkdir(exist_ok=True)
+    ##############################################################
     # Clear existing _OUTPUTS.txt for writing in append-mode
     if isfile(_OUTPUTS):
         remove(_OUTPUTS)
@@ -61,6 +73,7 @@ def run_all():
                 time_values[x - 1].append(time_diff)
     if time_values.__len__() != 0 and time_values[0].__len__() != 0:
         averaged_time_values = [sum(tv) / len(tv) for tv in time_values]
+        max_avg_time_per_day = max(averaged_time_values)
         log(17 * "-" + "runtime duration" + 17 * "-")
         for i in range(0, averaged_time_values.__len__()):
             # Shift i one up because day 0 doesn't exist
@@ -70,7 +83,8 @@ def run_all():
                 # add leading 0
                 str_i = "0" + str_i
             # log average of the day (3 decimal places)
-            log("Day " + str_i + ": " + str(format(averaged_time_values[i], ".3f")) + " seconds")
+            vis = floor((averaged_time_values[i] / max_avg_time_per_day) * _MAX_NUM_HASHTAGS_PER_DAY) * "#"
+            log("Day " + str_i + ": " + str(format(averaged_time_values[i], ".3f")) + " seconds" + 5*" " + vis)
         log(50 * "-")
         # log total execution time (3 decimal places)
         log("Total execution time: " + str(format(sum(averaged_time_values), ".3f")) + " seconds on average")
@@ -93,7 +107,6 @@ def log(text: str, name: str = None):
         with open(_OUTPUTS, "a+") as f:
             f.write(file_log_text)
 
-
 def run(name: str, logging: bool):
     # get output from calling given python-script
     path = str(_CODE_FOLDER / Path(name + ".py"))
@@ -103,6 +116,14 @@ def run(name: str, logging: bool):
     if logging:
         log(out, name)
 
+if __name__ == '__main__' :
+    # Run all years within range
+    if argv.__len__() < 2:
+        print("No year specified, running for all years in range " + str(_MIN_YEAR) + "-" + str(_MAX_YEAR))
+        for year in range(_MIN_YEAR, _MAX_YEAR +1):
+            run_all(year)
+    # Run all existing days for specified year
+    elif argv.__len__() == 2:
+        run_all(int(argv[1]))
 
-# Run all existing days
-run_all()
+
