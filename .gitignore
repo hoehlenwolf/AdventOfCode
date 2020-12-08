@@ -1,2 +1,3 @@
 .idea
 aoc-venv
+__pycache__
