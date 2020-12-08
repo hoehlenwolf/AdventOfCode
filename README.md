@@ -5,11 +5,11 @@ Day | [2015](aoc_2015) | [2016](aoc_2016) | [2017](aoc_2017)| [2018](aoc_2018) |
  1 | [░ ░](aoc_2015/code/day01.py)| [░ ░](aoc_2016/code/day01.py)| [░ ░](aoc_2017/code/day01.py)| [░ ░](aoc_2018/code/day01.py)| [█ █](aoc_2019/code/day01.py)| [█ █](aoc_2020/code/day01.py)|
  2 | [░ ░](aoc_2015/code/day02.py)| [░ ░](aoc_2016/code/day02.py)| [░ ░](aoc_2017/code/day02.py)| [░ ░](aoc_2018/code/day02.py)| [█ █](aoc_2019/code/day02.py)| [█ █](aoc_2020/code/day02.py)|
  3 | [░ ░](aoc_2015/code/day03.py)| [░ ░](aoc_2016/code/day03.py)| [░ ░](aoc_2017/code/day03.py)| [░ ░](aoc_2018/code/day03.py)| [█ █](aoc_2019/code/day03.py)| [█ █](aoc_2020/code/day03.py)|
- 4 | [░ ░](aoc_2015/code/day04.py)| [░ ░](aoc_2016/code/day04.py)| [░ ░](aoc_2017/code/day04.py)| [░ ░](aoc_2018/code/day04.py)| [█ ░](aoc_2019/code/day04.py)| [█ █](aoc_2020/code/day04.py)|
- 5 | [░ ░](aoc_2015/code/day05.py)| [░ ░](aoc_2016/code/day05.py)| [░ ░](aoc_2017/code/day05.py)| [░ ░](aoc_2018/code/day05.py)| [░ ░](aoc_2019/code/day05.py)| [█ █](aoc_2020/code/day05.py)|
+ 4 | [░ ░](aoc_2015/code/day04.py)| [░ ░](aoc_2016/code/day04.py)| [░ ░](aoc_2017/code/day04.py)| [░ ░](aoc_2018/code/day04.py)| [█ █](aoc_2019/code/day04.py)| [█ █](aoc_2020/code/day04.py)|
+ 5 | [░ ░](aoc_2015/code/day05.py)| [░ ░](aoc_2016/code/day05.py)| [░ ░](aoc_2017/code/day05.py)| [░ ░](aoc_2018/code/day05.py)| [█ █](aoc_2019/code/day05.py)| [█ █](aoc_2020/code/day05.py)|
  6 | [░ ░](aoc_2015/code/day06.py)| [░ ░](aoc_2016/code/day06.py)| [░ ░](aoc_2017/code/day06.py)| [░ ░](aoc_2018/code/day06.py)| [░ ░](aoc_2019/code/day06.py)| [█ █](aoc_2020/code/day06.py)|
  7 | [░ ░](aoc_2015/code/day07.py)| [░ ░](aoc_2016/code/day07.py)| [░ ░](aoc_2017/code/day07.py)| [░ ░](aoc_2018/code/day07.py)| [░ ░](aoc_2019/code/day07.py)| [█ █](aoc_2020/code/day07.py)|
- 8 | [░ ░](aoc_2015/code/day08.py)| [░ ░](aoc_2016/code/day08.py)| [░ ░](aoc_2017/code/day08.py)| [░ ░](aoc_2018/code/day08.py)| [░ ░](aoc_2019/code/day08.py)| [░ ░](aoc_2020/code/day08.py)|
+ 8 | [░ ░](aoc_2015/code/day08.py)| [░ ░](aoc_2016/code/day08.py)| [░ ░](aoc_2017/code/day08.py)| [░ ░](aoc_2018/code/day08.py)| [░ ░](aoc_2019/code/day08.py)| [█ █](aoc_2020/code/day08.py)|
  9 | [░ ░](aoc_2015/code/day09.py)| [░ ░](aoc_2016/code/day09.py)| [░ ░](aoc_2017/code/day09.py)| [░ ░](aoc_2018/code/day09.py)| [░ ░](aoc_2019/code/day09.py)| [░ ░](aoc_2020/code/day09.py)|
  10| [░ ░](aoc_2015/code/day10.py)| [░ ░](aoc_2016/code/day10.py)| [░ ░](aoc_2017/code/day10.py)| [░ ░](aoc_2018/code/day10.py)| [░ ░](aoc_2019/code/day10.py)| [░ ░](aoc_2020/code/day10.py)|
  11| [░ ░](aoc_2015/code/day11.py)| [░ ░](aoc_2016/code/day11.py)| [░ ░](aoc_2017/code/day11.py)| [░ ░](aoc_2018/code/day11.py)| [░ ░](aoc_2019/code/day11.py)| [░ ░](aoc_2020/code/day11.py)|

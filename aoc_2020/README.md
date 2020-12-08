@@ -8,6 +8,7 @@ A summarized output of all days can be found in [`Outputs.txt`](Outputs.txt) as 
 ```
       --------Part 1--------   --------Part 2--------
 Day       Time   Rank  Score       Time   Rank  Score
+  8   00:56:28   9230      0   01:08:54   7015      0
   7   00:39:34   3488      0   01:04:11   3550      0
   6   22:56:17  51615      0   23:05:07  49865      0
   5   01:05:20   8631      0   01:16:47   8177      0
