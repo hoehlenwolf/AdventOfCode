@@ -1,5 +1,6 @@
 from pathlib import Path
 from os.path import dirname, realpath
+
 _DAY = "01"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
@@ -25,6 +26,8 @@ def part_b(wanted_sum: int) -> int:
     # 3 nested for loops
     for i in range(lines.__len__()):
         for j in range(lines.__len__()):
+            if i == j:
+                break
             for k in range(lines.__len__()):
                 # don't check numbers against themselves
                 if i != j and i != k and j != k:

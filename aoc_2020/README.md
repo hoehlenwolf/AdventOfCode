@@ -8,6 +8,7 @@ A summarized output of all days can be found in [`Outputs.txt`](Outputs.txt) as 
 ```
       --------Part 1--------   --------Part 2--------
 Day       Time   Rank  Score       Time   Rank  Score
+  9   05:18:37  22738      0   05:23:11  20552      0
   8   00:56:28   9230      0   01:08:54   7015      0
   7   00:39:34   3488      0   01:04:11   3550      0
   6   22:56:17  51615      0   23:05:07  49865      0
@@ -19,31 +20,31 @@ Day       Time   Rank  Score       Time   Rank  Score
 ```
 # Runtime Durations
 ```bash
-Day 01: 0.287 seconds     ####################
-Day 02: 0.053 seconds     ###
-Day 03: 0.051 seconds     ###
-Day 04: 0.052 seconds     ###
-Day 05: 0.055 seconds     ###
-Day 06: 0.054 seconds     ###
-Day 07: 0.104 seconds     #######
-Day 08: 0.156 seconds     ##########
-Day 09: 0.050 seconds     ###
-Day 10: 0.051 seconds     ###
-Day 11: 0.049 seconds     ###
-Day 12: 0.050 seconds     ###
-Day 13: 0.051 seconds     ###
-Day 14: 0.050 seconds     ###
-Day 15: 0.049 seconds     ###
-Day 16: 0.049 seconds     ###
-Day 17: 0.050 seconds     ###
-Day 18: 0.050 seconds     ###
-Day 19: 0.049 seconds     ###
-Day 20: 0.049 seconds     ###
-Day 21: 0.049 seconds     ###
-Day 22: 0.049 seconds     ###
-Day 23: 0.050 seconds     ###
-Day 24: 0.049 seconds     ###
-Day 25: 0.049 seconds     ###
+Day 01: 0.227 seconds     ####################
+Day 02: 0.055 seconds     ####
+Day 03: 0.051 seconds     ####
+Day 04: 0.065 seconds     #####
+Day 05: 0.059 seconds     #####
+Day 06: 0.053 seconds     ####
+Day 07: 0.103 seconds     #########
+Day 08: 0.158 seconds     #############
+Day 09: 0.059 seconds     #####
+Day 10: 0.049 seconds     ####
+Day 11: 0.048 seconds     ####
+Day 12: 0.048 seconds     ####
+Day 13: 0.047 seconds     ####
+Day 14: 0.047 seconds     ####
+Day 15: 0.049 seconds     ####
+Day 16: 0.048 seconds     ####
+Day 17: 0.048 seconds     ####
+Day 18: 0.048 seconds     ####
+Day 19: 0.049 seconds     ####
+Day 20: 0.049 seconds     ####
+Day 21: 0.050 seconds     ####
+Day 22: 0.050 seconds     ####
+Day 23: 0.049 seconds     ####
+Day 24: 0.048 seconds     ####
+Day 25: 0.047 seconds     ####
 --------------------------------------------------
-Total execution time: 1.656 seconds on average
+Total execution time: 1.605 seconds on average
 ```
