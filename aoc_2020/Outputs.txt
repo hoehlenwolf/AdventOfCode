@@ -35,8 +35,8 @@ Part A: 3199139634
 Part B: 438559930
 ----------------------------
 ---------- Day 10 ----------
-Part A: None
-Part B: None
+Part A: 2310
+Part B: 64793042714624
 ----------------------------
 ---------- Day 11 ----------
 Part A: None
@@ -99,30 +99,30 @@ Part A: None
 Part B: None
 ----------------------------
 -----------------runtime duration-----------------
-Day 01: 0.227 seconds     ####################
-Day 02: 0.055 seconds     ####
-Day 03: 0.051 seconds     ####
-Day 04: 0.065 seconds     #####
-Day 05: 0.059 seconds     #####
-Day 06: 0.053 seconds     ####
-Day 07: 0.103 seconds     #########
-Day 08: 0.158 seconds     #############
-Day 09: 0.059 seconds     #####
-Day 10: 0.049 seconds     ####
-Day 11: 0.048 seconds     ####
-Day 12: 0.048 seconds     ####
-Day 13: 0.047 seconds     ####
-Day 14: 0.047 seconds     ####
-Day 15: 0.049 seconds     ####
-Day 16: 0.048 seconds     ####
-Day 17: 0.048 seconds     ####
-Day 18: 0.048 seconds     ####
-Day 19: 0.049 seconds     ####
-Day 20: 0.049 seconds     ####
-Day 21: 0.050 seconds     ####
-Day 22: 0.050 seconds     ####
-Day 23: 0.049 seconds     ####
-Day 24: 0.048 seconds     ####
-Day 25: 0.047 seconds     ####
+Day 01: 0.259 seconds     ####################
+Day 02: 0.063 seconds     ####
+Day 03: 0.057 seconds     ####
+Day 04: 0.054 seconds     ####
+Day 05: 0.057 seconds     ####
+Day 06: 0.057 seconds     ####
+Day 07: 0.111 seconds     ########
+Day 08: 0.169 seconds     #############
+Day 09: 0.064 seconds     ####
+Day 10: 0.053 seconds     ####
+Day 11: 0.055 seconds     ####
+Day 12: 0.051 seconds     ###
+Day 13: 0.050 seconds     ###
+Day 14: 0.052 seconds     ####
+Day 15: 0.053 seconds     ####
+Day 16: 0.053 seconds     ####
+Day 17: 0.052 seconds     ###
+Day 18: 0.050 seconds     ###
+Day 19: 0.050 seconds     ###
+Day 20: 0.050 seconds     ###
+Day 21: 0.051 seconds     ###
+Day 22: 0.050 seconds     ###
+Day 23: 0.050 seconds     ###
+Day 24: 0.057 seconds     ####
+Day 25: 0.051 seconds     ###
 --------------------------------------------------
-Total execution time: 1.605 seconds on average
+Total execution time: 1.721 seconds on average
