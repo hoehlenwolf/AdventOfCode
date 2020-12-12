@@ -28,8 +28,9 @@ _OUTPUTS = None
 _OUTPUT_FOLDER = None
 _CODE_FOLDER = None
 
-def run_all(year : int):
-    global YEAR_FOLDER, _OUTPUTS, _OUTPUT_FOLDER, _CODE_FOLDER
+
+def run_all(year: int):
+    global _YEAR_FOLDER, _OUTPUTS, _OUTPUT_FOLDER, _CODE_FOLDER
     """Runs all existing dayXX_template.py for specified year"""
     # Folder that contains all the years
     _YEAR_FOLDER = Path(dirname(realpath(__file__))) / Path("aoc_" + str(year))
@@ -84,12 +85,14 @@ def run_all(year : int):
                 str_i = "0" + str_i
             # log average of the day (3 decimal places)
             vis = floor((averaged_time_values[i] / max_avg_time_per_day) * _MAX_NUM_HASHTAGS_PER_DAY) * "#"
-            log("Day " + str_i + ": " + str(format(averaged_time_values[i], ".3f")) + " seconds" + 5*" " + vis)
+            log("Day " + str_i + ": " + str(format(averaged_time_values[i], ".3f")) + " seconds" + 5 * " " + vis)
         log(50 * "-")
         # log total execution time (3 decimal places)
         log("Total execution time: " + str(format(sum(averaged_time_values), ".3f")) + " seconds on average")
     else:
         log("There are no files in " + str(_CODE_FOLDER) + " to be run! :(")
+    # Add runtime duration to current years' readme
+    create_readme()
 
 
 def log(text: str, name: str = None):
@@ -107,6 +110,41 @@ def log(text: str, name: str = None):
         with open(_OUTPUTS, "a+") as f:
             f.write(file_log_text)
 
+
+def create_readme():
+    """Joins upper part of readme together with the runtime duration statistics and puts it all in
+    the README.md for current year"""
+    # lines that will be written to README
+    rm_to_keep = []
+    # Copy first part of Readme (until "--> \n" including)
+    with open(_YEAR_FOLDER / "README.md", "r") as rm_f:
+        for line in rm_f.readlines():
+            rm_to_keep.append(line)
+            if line.endswith("-->\n"):
+                break
+    # get the runtime duration lines
+    runtime_dur_lines = []
+    # copy from Outputs.txt
+    copying = False
+    # Begin the bash-code-section in Readme
+    rm_to_keep.append("```bash \n")
+    # pick out the last section of Outputs.txt
+    with open(_OUTPUTS, "r") as o_f:
+        for line in o_f.readlines():
+            if line.__contains__("runtime duration"):
+                copying = True
+            if copying:
+                runtime_dur_lines.append(line)
+    # append the lines with runtime durations to the readme lines (first part)
+    rm_to_keep.append(runtime_dur_lines)
+    # close the code section
+    rm_to_keep.append("``` \n")
+    # Write the rm_to_keep lines to README.md, overwriting everything
+    with open(_YEAR_FOLDER / "README.md", "w") as rm_f:
+        for line in rm_to_keep:
+            rm_f.writelines(line)
+
+
 def run(name: str, logging: bool):
     # get output from calling given python-script
     path = str(_CODE_FOLDER / Path(name + ".py"))
@@ -116,14 +154,13 @@ def run(name: str, logging: bool):
     if logging:
         log(out, name)
 
-if __name__ == '__main__' :
+
+if __name__ == '__main__':
     # Run all years within range
     if argv.__len__() < 2:
         print("No year specified, running for all years in range " + str(_MIN_YEAR) + "-" + str(_MAX_YEAR))
-        for year in range(_MIN_YEAR, _MAX_YEAR +1):
+        for year in range(_MIN_YEAR, _MAX_YEAR + 1):
             run_all(year)
     # Run all existing days for specified year
     elif argv.__len__() == 2:
         run_all(int(argv[1]))
-
-
