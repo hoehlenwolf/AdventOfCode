@@ -1,3 +1,4 @@
+import time
 from os.path import dirname, realpath
 from pathlib import Path
 from copy import deepcopy
@@ -59,6 +60,7 @@ def next_step(previous: list, count_adjacent_function, tolerance_occupied_nearby
     seats_changed = 0
     for row in range(0, previous.__len__()):
         for col in range(0, previous[row].__len__()):
+            st = time.time()
             current = previous[row][col]
             if current == "#" and count_adjacent_function(previous, row, col, "#") >= tolerance_occupied_nearby:
                 result[row][col] = "L"
