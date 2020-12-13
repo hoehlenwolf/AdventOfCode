@@ -19,6 +19,8 @@ summarized_output = True  # if there should be Outputs.txt for combined Output o
 ITERATIONS = 10
 # Number of max Hashtags per day for visualization of runtime durations
 _MAX_NUM_HASHTAGS_PER_DAY = 40
+# maximum number of seconds for a day's solution (for visualizing runtime durations)
+_MAX_SECONDS_PER_DAY = 2
 # Years that can be run
 _MIN_YEAR = 2015
 _MAX_YEAR = 2020
@@ -74,7 +76,8 @@ def run_all(year_to_run: int):
                 time_values[x - 1].append(time_diff)
     if time_values.__len__() != 0 and time_values[0].__len__() != 0:
         averaged_time_values = [sum(tv) / len(tv) for tv in time_values]
-        max_avg_time_per_day = max(averaged_time_values)
+        relevant_time_values = [v for v in averaged_time_values if v <= _MAX_SECONDS_PER_DAY]
+        max_avg_time_per_day = max(relevant_time_values)
         log(17 * "-" + "runtime duration" + 17 * "-")
         for i in range(0, averaged_time_values.__len__()):
             # Shift i one up because day 0 doesn't exist
@@ -84,7 +87,10 @@ def run_all(year_to_run: int):
                 # add leading 0
                 str_i = "0" + str_i
             # log average of the day (3 decimal places)
-            vis = floor((averaged_time_values[i] / max_avg_time_per_day) * _MAX_NUM_HASHTAGS_PER_DAY) * "#"
+            if averaged_time_values[i] > _MAX_SECONDS_PER_DAY:
+                vis = _MAX_NUM_HASHTAGS_PER_DAY * "#" + 5*"..." + "#"
+            else:
+                vis = floor((averaged_time_values[i] / max_avg_time_per_day) * _MAX_NUM_HASHTAGS_PER_DAY) * "#"
             log("Day " + str_i + ": " + str(format(averaged_time_values[i], ".3f")) + " seconds" + 5 * " " + vis)
         log(50 * "-")
         # log total execution time (3 decimal places)
