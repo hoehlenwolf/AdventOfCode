@@ -1,7 +1,6 @@
 from os.path import dirname, realpath
 from pathlib import Path
-from math import sin, cos
-from numpy import deg2rad, rad2deg
+
 _DAY = "12"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
@@ -10,7 +9,7 @@ with open(_INPUT_PATH, 'r') as f:
 
 
 ####################################################################################################
-def rotate(previous_direction: (int,int), rotate_direction: chr, deg: int) -> (int,int):
+def rotate(previous_direction: (int, int), rotate_direction: chr, deg: int) -> (int, int):
     """Rotates given input vector `previous_direction` by `deg`-many degrees either right ('R') or left ('L')
     given by `rotate_direction`
     `steps` have to be multiples of 90 degrees"""
@@ -83,7 +82,7 @@ def part_a():
             # rotate current facing direction (vector) by 'steps'-many degrees into the given 'direction'
             curr_facing = rotate(curr_facing, direction, steps)
     # return Manhattan-distance between ship's final position and starting point (0,0)
-    return abs(curr_x)+abs(curr_y)
+    return abs(curr_x) + abs(curr_y)
 
 
 def part_b():

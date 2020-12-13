@@ -18,22 +18,22 @@ summarized_output = True  # if there should be Outputs.txt for combined Output o
 # Number of iterations for constructing average runtime
 ITERATIONS = 10
 # Number of max Hashtags per day for visualization of runtime durations
-_MAX_NUM_HASHTAGS_PER_DAY = 20
+_MAX_NUM_HASHTAGS_PER_DAY = 40
 # Years that can be run
 _MIN_YEAR = 2015
 _MAX_YEAR = 2020
 # global variables for folder structure, set in run_all
-_YEAR_FOLDER = None
-_OUTPUTS = None
-_OUTPUT_FOLDER = None
-_CODE_FOLDER = None
+_YEAR_FOLDER = Path("")
+_OUTPUTS = Path("")
+_OUTPUT_FOLDER = Path("")
+_CODE_FOLDER = Path("")
 
 
-def run_all(year: int):
+def run_all(year_to_run: int):
     global _YEAR_FOLDER, _OUTPUTS, _OUTPUT_FOLDER, _CODE_FOLDER
     """Runs all existing dayXX_template.py for specified year"""
     # Folder that contains all the years
-    _YEAR_FOLDER = Path(dirname(realpath(__file__))) / Path("aoc_" + str(year))
+    _YEAR_FOLDER = Path(dirname(realpath(__file__))) / Path("aoc_" + str(year_to_run))
     # file where combined outputs of all days will be written
     _OUTPUTS = _YEAR_FOLDER / Path("Outputs.txt")
     # Folder in which the output should be stored into

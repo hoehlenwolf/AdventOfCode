@@ -47,8 +47,8 @@ Part A: 904
 Part B: 18747
 ----------------------------
 ---------- Day 13 ----------
-Part A: None
-Part B: None
+Part A: 8063
+Part B: 775230782877242
 ----------------------------
 ---------- Day 14 ----------
 Part A: None
@@ -99,30 +99,30 @@ Part A: None
 Part B: None
 ----------------------------
 -----------------runtime duration-----------------
-Day 01: 0.259 seconds     
-Day 02: 0.053 seconds     
-Day 03: 0.052 seconds     
-Day 04: 0.054 seconds     
-Day 05: 0.057 seconds     
-Day 06: 0.051 seconds     
-Day 07: 0.106 seconds     
-Day 08: 0.164 seconds     
-Day 09: 0.060 seconds     
-Day 10: 0.052 seconds     
-Day 11: 6.293 seconds     ####################
-Day 12: 0.207 seconds     
-Day 13: 0.050 seconds     
-Day 14: 0.049 seconds     
-Day 15: 0.050 seconds     
-Day 16: 0.045 seconds     
-Day 17: 0.051 seconds     
-Day 18: 0.047 seconds     
-Day 19: 0.049 seconds     
-Day 20: 0.047 seconds     
-Day 21: 0.050 seconds     
-Day 22: 0.057 seconds     
-Day 23: 0.057 seconds     
-Day 24: 0.052 seconds     
-Day 25: 0.049 seconds     
+Day 01: 0.268 seconds     #
+Day 02: 0.063 seconds     
+Day 03: 0.058 seconds     
+Day 04: 0.061 seconds     
+Day 05: 0.063 seconds     
+Day 06: 0.061 seconds     
+Day 07: 0.121 seconds     
+Day 08: 0.177 seconds     #
+Day 09: 0.068 seconds     
+Day 10: 0.059 seconds     
+Day 11: 5.646 seconds     ########################################
+Day 12: 0.060 seconds     
+Day 13: 0.208 seconds     #
+Day 14: 0.057 seconds     
+Day 15: 0.059 seconds     
+Day 16: 0.060 seconds     
+Day 17: 0.060 seconds     
+Day 18: 0.061 seconds     
+Day 19: 0.061 seconds     
+Day 20: 0.063 seconds     
+Day 21: 0.063 seconds     
+Day 22: 0.060 seconds     
+Day 23: 0.060 seconds     
+Day 24: 0.058 seconds     
+Day 25: 0.057 seconds     
 --------------------------------------------------
-Total execution time: 8.063 seconds on average
+Total execution time: 7.631 seconds on average
