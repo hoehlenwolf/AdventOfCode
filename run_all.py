@@ -63,12 +63,8 @@ def run_all(year_to_run: int):
             name = "day" + x_str
             # if dayXX exists
             if isfile(_CODE_FOLDER / Path(name + ".py")):
-                # Start a timer
-                time_start = time.time()
                 # run the file
-                run(name, logging)
-                time_end = time.time()
-                time_diff = time_end - time_start
+                time_diff = run(name, logging)
                 # enlarge time_values array if new day reached for the first time
                 if x - 1 == time_values.__len__():
                     time_values.append([])
@@ -151,14 +147,18 @@ def create_readme():
             rm_f.writelines(line)
 
 
-def run(name: str, logging: bool):
+def run(name: str, logging: bool) -> int:
     # get output from calling given python-script
     path = str(_CODE_FOLDER / Path(name + ".py"))
+    # stop time while day's file is run
+    start = time.time()
     out = str(subprocess.check_output([_PYTHON, path]), "UTF-8")
+    time_delta = time.time() - start
     # replace double linebreaks (windows)
     out = out.replace("\r\n", "\n")
     if logging:
         log(out, name)
+    return time_delta
 
 
 if __name__ == '__main__':
