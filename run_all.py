@@ -16,11 +16,17 @@ per_day_output = True  # if for each day there should be a dayXX_output.txt
 printout = True  # if printout in console is wanted
 summarized_output = True  # if there should be Outputs.txt for combined Output of all days
 # Number of iterations for constructing average runtime
-ITERATIONS = 10
-# Number of max Hashtags per day for visualization of runtime durations
-_MAX_NUM_HASHTAGS_PER_DAY = 40
+ITERATIONS = {2015: 10, 2016: 10, 2017: 10, 2018: 10, 2019: 10, 2020: 3, 2021: 10}
+# Number of max Hashtags per day for visualization of runtime durations (first, second) with first = max number of
+# hashtags for times less than _MAX_SECONDS_PER_DAY and additionally second-many for values above that
+# looks like: Day XX  12.345 seconds    #### (MAX_NUM_HASHTAGS_PER_DAY[0]) ###.....### (MAX_NUM_HASHTAGS_PER_DAY[0]) ###
+_MAX_NUM_SYMBOLS_PER_DAY = (40, 40)
+# Symbol to use for visualizing runtime durations
+_VIS_SYMBOL = u"\u2588".encode("UTF-8") # is Ascii 219 block
 # maximum number of seconds for a day's solution (for visualizing runtime durations)
-_MAX_SECONDS_PER_DAY = 2
+# values below that will be displayed more detailed in runtime duration summary, while values above that might
+# get scaled down
+_MAX_SECONDS_PER_DAY = {2015: 2, 2016: 2, 2017: 2, 2018: 2, 2019: 2, 2020: 5, 2021: 2}
 # Years that can be run
 _MIN_YEAR = 2015
 _MAX_YEAR = 2020
@@ -52,7 +58,7 @@ def run_all(year_to_run: int):
         remove(_OUTPUTS)
     # 2-d array to store time values in (-> iterations; v days)
     time_values = [[]]
-    for i in range(0, ITERATIONS):
+    for i in range(0, ITERATIONS[year_to_run]):
         # log only on first iteration (save outputs of days)
         logging = (i == 0)
         # create names day01 .. day25
@@ -72,8 +78,6 @@ def run_all(year_to_run: int):
                 time_values[x - 1].append(time_diff)
     if time_values.__len__() != 0 and time_values[0].__len__() != 0:
         averaged_time_values = [sum(tv) / len(tv) for tv in time_values]
-        relevant_time_values = [v for v in averaged_time_values if v <= _MAX_SECONDS_PER_DAY]
-        max_avg_time_per_day = max(relevant_time_values)
         log(17 * "-" + "runtime duration" + 17 * "-")
         for i in range(0, averaged_time_values.__len__()):
             # Shift i one up because day 0 doesn't exist
@@ -82,15 +86,13 @@ def run_all(year_to_run: int):
             if i < 9:
                 # add leading 0
                 str_i = "0" + str_i
-            # log average of the day (3 decimal places)
-            if averaged_time_values[i] > _MAX_SECONDS_PER_DAY:
-                vis = _MAX_NUM_HASHTAGS_PER_DAY * "#" + 5*"..." + "#"
-            else:
-                vis = floor((averaged_time_values[i] / max_avg_time_per_day) * _MAX_NUM_HASHTAGS_PER_DAY) * "#"
-            log("Day " + str_i + ": " + str(format(averaged_time_values[i], ".3f")) + " seconds" + 5 * " " + vis)
+            # create visualization of the runtime duration for this day (Day XX 00.123 seconds ### ... #####)
+            vis = str(create_runtime_vis(year_to_run, averaged_time_values, i), "UTF-8")
+            log("Day " + str_i + ": " + str(format(averaged_time_values[i], "06.3f")) + " seconds" + 5 * " " + vis)
         log(50 * "-")
         # log total execution time (3 decimal places)
-        log("Total execution time: " + str(format(sum(averaged_time_values), ".3f")) + " seconds on average")
+        log("Total execution time: " + str(format(sum(averaged_time_values), "06.3f")) + " seconds on average (" + str(
+            ITERATIONS[year_to_run]) + " iterations)")
     else:
         log("There are no files in " + str(_CODE_FOLDER) + " to be run! :(")
     # Add runtime duration to current years' readme
@@ -101,6 +103,7 @@ def log(text: str, name: str = None):
     file_log_text = text
     if not file_log_text.endswith("\n"):
         file_log_text += "\n"
+    file_log_text = file_log_text.encode("utf-8").decode("utf-8")
     if printout:
         print(text)
 
@@ -109,8 +112,8 @@ def log(text: str, name: str = None):
             f.write(file_log_text)
 
     if summarized_output:
-        with open(_OUTPUTS, "a+") as f:
-            f.write(file_log_text)
+        with open(_OUTPUTS, "ab+") as f:
+            f.write(file_log_text.encode("UTF-8"))
 
 
 def create_readme():
@@ -147,7 +150,7 @@ def create_readme():
             rm_f.writelines(line)
 
 
-def run(name: str, logging: bool) -> int:
+def run(name: str, logging: bool) -> float:
     # get output from calling given python-script
     path = str(_CODE_FOLDER / Path(name + ".py"))
     # stop time while day's file is run
@@ -159,6 +162,24 @@ def run(name: str, logging: bool) -> int:
     if logging:
         log(out, name)
     return time_delta
+
+
+def create_runtime_vis(current_year: int, averaged_time_values: list, i: int) -> str:
+    """Builds a visualization of a given runtime duration in relation to others in the same year"""
+    # sort out time values higher than threshold
+    relevant_time_values = [v for v in averaged_time_values if v <= _MAX_SECONDS_PER_DAY[current_year]]
+    # get maximum of them
+    max_avg_time_per_day = max(relevant_time_values)
+    # if value to visualize is above the threshold
+    if averaged_time_values[i] > _MAX_SECONDS_PER_DAY[current_year]:
+        # fill the left part completely and add Hashtags to the right part as needed.
+        vis = _MAX_NUM_SYMBOLS_PER_DAY[0] * _VIS_SYMBOL + "....".encode("UTF-8") + floor((
+                averaged_time_values[i] / max(averaged_time_values) * _MAX_NUM_SYMBOLS_PER_DAY[1])) * _VIS_SYMBOL
+    else:
+        # if value to visualize is below the threshold
+        # just create the high-detailed scaled left part
+        vis = floor((averaged_time_values[i] / max_avg_time_per_day) * _MAX_NUM_SYMBOLS_PER_DAY[0]) * _VIS_SYMBOL
+    return vis
 
 
 if __name__ == '__main__':
