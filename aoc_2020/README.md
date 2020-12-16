@@ -8,6 +8,7 @@ A summarized output of all days can be found in [`Outputs.txt`](Outputs.txt) as 
 ```
       --------Part 1--------   --------Part 2--------
 Day       Time   Rank  Score       Time   Rank  Score
+ 16   06:46:24  14548      0   08:19:39  10939      0
  15   09:56:12  18695      0   09:57:05  16650      0
  14   02:38:14   8430      0   05:58:56   9830      0
  13   01:30:18   7934      0   06:51:15   8483      0
@@ -30,31 +31,31 @@ After this, insert runtime durations
 -->
 ```bash 
 -----------------runtime duration-----------------
-Day 01: 00.420 seconds     ████████████████████████████████████████
-Day 02: 00.090 seconds     ████████
-Day 03: 00.076 seconds     ███████
-Day 04: 00.084 seconds     ███████
-Day 05: 00.088 seconds     ████████
-Day 06: 00.084 seconds     ████████
-Day 07: 00.171 seconds     ████████████████
-Day 08: 00.255 seconds     ████████████████████████
-Day 09: 00.096 seconds     █████████
-Day 10: 00.082 seconds     ███████
-Day 11: 08.072 seconds     ████████████████████████████████████████....██████████████████
-Day 12: 00.083 seconds     ███████
-Day 13: 00.277 seconds     ██████████████████████████
-Day 14: 00.368 seconds     ███████████████████████████████████
-Day 15: 17.392 seconds     ████████████████████████████████████████....████████████████████████████████████████
-Day 16: 00.077 seconds     ███████
-Day 17: 00.109 seconds     ██████████
-Day 18: 00.078 seconds     ███████
-Day 19: 00.078 seconds     ███████
-Day 20: 00.073 seconds     ██████
-Day 21: 00.073 seconds     ██████
-Day 22: 00.078 seconds     ███████
-Day 23: 00.074 seconds     ███████
-Day 24: 00.087 seconds     ████████
-Day 25: 00.095 seconds     █████████
+Day 01: 00.239 seconds     ████████████████████████████████████████
+Day 02: 00.053 seconds     ████████
+Day 03: 00.049 seconds     ████████
+Day 04: 00.051 seconds     ████████
+Day 05: 00.053 seconds     ████████
+Day 06: 00.051 seconds     ████████
+Day 07: 00.100 seconds     ████████████████
+Day 08: 00.151 seconds     █████████████████████████
+Day 09: 00.056 seconds     █████████
+Day 10: 00.048 seconds     ███████
+Day 11: 05.287 seconds     ████████████████████████████████████████....███████████████████████
+Day 12: 00.052 seconds     ████████
+Day 13: 00.182 seconds     ██████████████████████████████
+Day 14: 00.233 seconds     ██████████████████████████████████████
+Day 15: 09.077 seconds     ████████████████████████████████████████....████████████████████████████████████████
+Day 16: 00.079 seconds     █████████████
+Day 17: 00.055 seconds     █████████
+Day 18: 00.052 seconds     ████████
+Day 19: 00.052 seconds     ████████
+Day 20: 00.051 seconds     ████████
+Day 21: 00.052 seconds     ████████
+Day 22: 00.050 seconds     ████████
+Day 23: 00.052 seconds     ████████
+Day 24: 00.050 seconds     ████████
+Day 25: 00.050 seconds     ████████
 --------------------------------------------------
-Total execution time: 28.458 seconds on average (3 iterations)
+Total execution time: 16.225 seconds on average (3 iterations)
 ``` 
