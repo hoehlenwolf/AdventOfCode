@@ -26,7 +26,7 @@ _VIS_SYMBOL = u"\u2588".encode("UTF-8") # is Ascii 219 block
 # maximum number of seconds for a day's solution (for visualizing runtime durations)
 # values below that will be displayed more detailed in runtime duration summary, while values above that might
 # get scaled down
-_MAX_SECONDS_PER_DAY = {2015: 2, 2016: 2, 2017: 2, 2018: 2, 2019: 2, 2020: 5, 2021: 2}
+_MAX_SECONDS_PER_DAY = {2015: 2, 2016: 2, 2017: 2, 2018: 2, 2019: 2, 2020: 2, 2021: 2}
 # Years that can be run
 _MIN_YEAR = 2015
 _MAX_YEAR = 2020

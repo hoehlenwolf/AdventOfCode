@@ -1,5 +1,7 @@
 from os.path import dirname, realpath
 from pathlib import Path
+from sys import platform
+import ctypes
 _DAY = "15"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
@@ -10,7 +12,7 @@ with open(_INPUT_PATH, 'r') as f:
 
 
 ####################################################################################################
-def calc_nth_number(n: int) -> int:
+def calc_nth_number_slow(n: int) -> int:
     """Calculates the `n`-th spoken number"""
     # dict with spoken numbers consisting of key:value pairs (number: spoken_last_in_turn_number)
     spoken_numbers = dict()
@@ -41,6 +43,32 @@ def calc_nth_number(n: int) -> int:
     # return the n-th number spoken (prev_number for n+1-th turn)
     return prev_num
 
+
+def calc_nth_number(n: int) -> int:
+    # try to use the lightning fast (~20x speedup) C-function (day15.c) compiled as a dynamic library
+    # ("day15.dll" on Windows/ "day15.so" on Linux)
+    try:
+        # create type for int array if appropriate length (len(starting_numbers))
+        c_int_array = ctypes.c_int * starting_numbers.__len__()
+        # fill it with the starting values extracted from inputs/day15_input.txt
+        c_starting_numbers = c_int_array(*starting_numbers)
+        # if on windows
+        if platform == "win32":
+            c_calc_nth_number = ctypes.CDLL(str(Path(dirname(realpath(__file__))) / "day15_win.dll"))
+        else:  # otherwise
+            c_calc_nth_number = ctypes.CDLL(str(Path(dirname(realpath(__file__))) / "day15_linux.so"))
+        # call the function calcNthNumber in the Library
+        c_calc_nth_number.calcNthNumber.argtypes = [ctypes.c_int, ctypes.POINTER(ctypes.c_int), ctypes.c_int]
+        result = c_calc_nth_number.calcNthNumber(n, c_starting_numbers, starting_numbers.__len__())
+    except:
+        print("Error: Lightning fast C-Solution for Day 15 could not be loaded via ctypes. Make sure a compiled .dll "
+              "or .so file exists in aoc_2020/code/ named day15_win.dll or day15_linux.so")
+        print("The Makefile in the root directory should work for Windows and Linux, if you have cl.exe or gcc "
+              "installed")
+        print("Falling back to slow python solution")
+        # if something failed, use the slow python version of the function
+        result = calc_nth_number_slow(n)
+    return result
 
 def part_a():
     """Part A"""

@@ -99,30 +99,30 @@ Part A: None
 Part B: None
 ----------------------------
 -----------------runtime duration-----------------
-Day 01: 00.239 seconds     ████████████████████████████████████████
-Day 02: 00.053 seconds     ████████
-Day 03: 00.049 seconds     ████████
-Day 04: 00.051 seconds     ████████
-Day 05: 00.053 seconds     ████████
-Day 06: 00.051 seconds     ████████
-Day 07: 00.100 seconds     ████████████████
-Day 08: 00.151 seconds     █████████████████████████
-Day 09: 00.056 seconds     █████████
-Day 10: 00.048 seconds     ███████
-Day 11: 05.287 seconds     ████████████████████████████████████████....███████████████████████
-Day 12: 00.052 seconds     ████████
-Day 13: 00.182 seconds     ██████████████████████████████
-Day 14: 00.233 seconds     ██████████████████████████████████████
-Day 15: 09.077 seconds     ████████████████████████████████████████....████████████████████████████████████████
-Day 16: 00.079 seconds     █████████████
-Day 17: 00.055 seconds     █████████
-Day 18: 00.052 seconds     ████████
-Day 19: 00.052 seconds     ████████
-Day 20: 00.051 seconds     ████████
-Day 21: 00.052 seconds     ████████
-Day 22: 00.050 seconds     ████████
-Day 23: 00.052 seconds     ████████
-Day 24: 00.050 seconds     ████████
-Day 25: 00.050 seconds     ████████
+Day 01: 00.242 seconds     █████████████
+Day 02: 00.056 seconds     ██
+Day 03: 00.052 seconds     ██
+Day 04: 00.054 seconds     ██
+Day 05: 00.055 seconds     ██
+Day 06: 00.053 seconds     ██
+Day 07: 00.101 seconds     █████
+Day 08: 00.156 seconds     ████████
+Day 09: 00.059 seconds     ███
+Day 10: 00.050 seconds     ██
+Day 11: 05.411 seconds     ████████████████████████████████████████....████████████████████████████████████████
+Day 12: 00.057 seconds     ███
+Day 13: 00.195 seconds     ██████████
+Day 14: 00.240 seconds     ████████████
+Day 15: 00.744 seconds     ████████████████████████████████████████
+Day 16: 00.077 seconds     ████
+Day 17: 00.054 seconds     ██
+Day 18: 00.051 seconds     ██
+Day 19: 00.051 seconds     ██
+Day 20: 00.051 seconds     ██
+Day 21: 00.053 seconds     ██
+Day 22: 00.051 seconds     ██
+Day 23: 00.052 seconds     ██
+Day 24: 00.052 seconds     ██
+Day 25: 00.051 seconds     ██
 --------------------------------------------------
-Total execution time: 16.225 seconds on average (3 iterations)
+Total execution time: 08.069 seconds on average (3 iterations)

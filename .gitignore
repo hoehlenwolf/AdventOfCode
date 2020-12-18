@@ -1,3 +1,7 @@
 .idea
 aoc-venv
 __pycache__
+.vs
+*.exp
+*.obj
+*.lib
