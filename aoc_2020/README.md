@@ -33,31 +33,31 @@ After this, insert runtime durations
 -->
 ```bash 
 -----------------runtime duration-----------------
-Day 01: 00.277 seconds     █████████████
-Day 02: 00.065 seconds     ███
-Day 03: 00.059 seconds     ██
-Day 04: 00.060 seconds     ███
-Day 05: 00.067 seconds     ███
-Day 06: 00.069 seconds     ███
-Day 07: 00.140 seconds     ██████
-Day 08: 00.195 seconds     █████████
-Day 09: 00.067 seconds     ███
-Day 10: 00.059 seconds     ██
-Day 11: 05.885 seconds     ██████████████████████████████████████████████████....████████████████████
-Day 12: 00.064 seconds     ███
-Day 13: 00.215 seconds     ██████████
-Day 14: 00.282 seconds     ██████████████
-Day 15: 00.861 seconds     ███████████████████████████████████████████
-Day 16: 00.082 seconds     ████
-Day 17: 00.058 seconds     ██
-Day 18: 00.077 seconds     ███
-Day 19: 00.059 seconds     ██
-Day 20: 00.058 seconds     ██
-Day 21: 00.058 seconds     ██
-Day 22: 00.060 seconds     ███
-Day 23: 00.067 seconds     ███
-Day 24: 00.060 seconds     ███
-Day 25: 00.058 seconds     ██
+Day 01:  249 ms ████████████████████████
+Day 02:   59 ms █████
+Day 03:   55 ms █████
+Day 04:   57 ms █████
+Day 05:   63 ms ██████
+Day 06:   58 ms █████
+Day 07:  111 ms ███████████
+Day 08:  177 ms █████████████████
+Day 09:   67 ms ██████
+Day 10:   52 ms █████
+Day 11: 5352 ms ████████████████████████████████████████████████████████████████████████████████████████████████████....████████████████████
+Day 12:   56 ms █████
+Day 13:  194 ms ███████████████████
+Day 14:  240 ms ████████████████████████
+Day 15:  726 ms ████████████████████████████████████████████████████████████████████████
+Day 16:   75 ms ███████
+Day 17:   53 ms █████
+Day 18:   71 ms ███████
+Day 19:   51 ms █████
+Day 20:   51 ms █████
+Day 21:   50 ms █████
+Day 22:   50 ms █████
+Day 23:   50 ms █████
+Day 24:   50 ms █████
+Day 25:   49 ms ████
 --------------------------------------------------
-Total execution time: 09.004 seconds on average (5 iterations)
+Total execution time: 8080 ms on average (3 iterations)
 ``` 

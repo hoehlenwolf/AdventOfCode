@@ -16,11 +16,11 @@ per_day_output = True  # if for each day there should be a dayXX_output.txt
 printout = True  # if printout in console is wanted
 summarized_output = True  # if there should be Outputs.txt for combined Output of all days
 # Number of iterations for constructing average runtime
-ITERATIONS = {2015: 10, 2016: 10, 2017: 10, 2018: 10, 2019: 10, 2020: 5, 2021: 10}
+ITERATIONS = {2015: 10, 2016: 10, 2017: 10, 2018: 10, 2019: 10, 2020: 3, 2021: 10}
 # Number of max Hashtags per day for visualization of runtime durations (first, second) with first = max number of
 # hashtags for times less than _MAX_SECONDS_PER_DAY and additionally second-many for values above that
 # looks like: Day XX  12.345 seconds    #### (MAX_NUM_HASHTAGS_PER_DAY[0]) ###.....### (MAX_NUM_HASHTAGS_PER_DAY[0]) ###
-_MAX_NUM_SYMBOLS_PER_DAY = (50, 20)
+_MAX_NUM_SYMBOLS_PER_DAY = (100, 20)
 # Symbol to use for visualizing runtime durations
 _VIS_SYMBOL = u"\u2588".encode("UTF-8") # is Ascii 219 block
 # maximum number of seconds for a day's solution (for visualizing runtime durations)
@@ -88,11 +88,11 @@ def run_all(year_to_run: int):
                 str_i = "0" + str_i
             # create visualization of the runtime duration for this day (Day XX 00.123 seconds ### ... #####)
             vis = str(create_runtime_vis(year_to_run, averaged_time_values, i), "UTF-8")
-            log("Day " + str_i + ": " + str(format(averaged_time_values[i], "06.3f")) + " seconds" + 5 * " " + vis)
+            ms = str(int(averaged_time_values[i]*1000))
+            log("Day " + str_i + ": " + (4-ms.__len__()) * " " + ms + " ms " + vis)
         log(50 * "-")
         # log total execution time (3 decimal places)
-        log("Total execution time: " + str(format(sum(averaged_time_values), "06.3f")) + " seconds on average (" + str(
-            ITERATIONS[year_to_run]) + " iterations)")
+        log("Total execution time: " + str(int(sum(averaged_time_values)*1000)) + " ms on average (" + str(ITERATIONS[year_to_run]) + " iterations)")
     else:
         log("There are no files in " + str(_CODE_FOLDER) + " to be run! :(")
     # Add runtime duration to current years' readme
