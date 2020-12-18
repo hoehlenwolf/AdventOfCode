@@ -16,17 +16,17 @@ per_day_output = True  # if for each day there should be a dayXX_output.txt
 printout = True  # if printout in console is wanted
 summarized_output = True  # if there should be Outputs.txt for combined Output of all days
 # Number of iterations for constructing average runtime
-ITERATIONS = {2015: 10, 2016: 10, 2017: 10, 2018: 10, 2019: 10, 2020: 3, 2021: 10}
+ITERATIONS = {2015: 10, 2016: 10, 2017: 10, 2018: 10, 2019: 10, 2020: 5, 2021: 10}
 # Number of max Hashtags per day for visualization of runtime durations (first, second) with first = max number of
 # hashtags for times less than _MAX_SECONDS_PER_DAY and additionally second-many for values above that
 # looks like: Day XX  12.345 seconds    #### (MAX_NUM_HASHTAGS_PER_DAY[0]) ###.....### (MAX_NUM_HASHTAGS_PER_DAY[0]) ###
-_MAX_NUM_SYMBOLS_PER_DAY = (40, 40)
+_MAX_NUM_SYMBOLS_PER_DAY = (50, 20)
 # Symbol to use for visualizing runtime durations
 _VIS_SYMBOL = u"\u2588".encode("UTF-8") # is Ascii 219 block
 # maximum number of seconds for a day's solution (for visualizing runtime durations)
 # values below that will be displayed more detailed in runtime duration summary, while values above that might
 # get scaled down
-_MAX_SECONDS_PER_DAY = {2015: 2, 2016: 2, 2017: 2, 2018: 2, 2019: 2, 2020: 2, 2021: 2}
+_SECONDS_PER_DAY = {2015: 2, 2016: 2, 2017: 2, 2018: 2, 2019: 2, 2020: 1, 2021: 2}
 # Years that can be run
 _MIN_YEAR = 2015
 _MAX_YEAR = 2020
@@ -167,18 +167,18 @@ def run(name: str, logging: bool) -> float:
 def create_runtime_vis(current_year: int, averaged_time_values: list, i: int) -> str:
     """Builds a visualization of a given runtime duration in relation to others in the same year"""
     # sort out time values higher than threshold
-    relevant_time_values = [v for v in averaged_time_values if v <= _MAX_SECONDS_PER_DAY[current_year]]
+    relevant_time_values = [v for v in averaged_time_values if v <= _SECONDS_PER_DAY[current_year]]
     # get maximum of them
     max_avg_time_per_day = max(relevant_time_values)
     # if value to visualize is above the threshold
-    if averaged_time_values[i] > _MAX_SECONDS_PER_DAY[current_year]:
+    if averaged_time_values[i] > _SECONDS_PER_DAY[current_year]:
         # fill the left part completely and add Hashtags to the right part as needed.
         vis = _MAX_NUM_SYMBOLS_PER_DAY[0] * _VIS_SYMBOL + "....".encode("UTF-8") + floor((
                 averaged_time_values[i] / max(averaged_time_values) * _MAX_NUM_SYMBOLS_PER_DAY[1])) * _VIS_SYMBOL
     else:
         # if value to visualize is below the threshold
         # just create the high-detailed scaled left part
-        vis = floor((averaged_time_values[i] / max_avg_time_per_day) * _MAX_NUM_SYMBOLS_PER_DAY[0]) * _VIS_SYMBOL
+        vis = floor((averaged_time_values[i] / _SECONDS_PER_DAY[current_year]) * _MAX_NUM_SYMBOLS_PER_DAY[0]) * _VIS_SYMBOL
     return vis
 
 
