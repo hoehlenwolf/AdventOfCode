@@ -1,4 +1,4 @@
 ---------- Day 22 ----------
-Part A: None
-Part B: None
+Part A: Player 1 wins. Score: 33694
+Part B: Player 1 wins. Score: 31835
 ----------------------------
