@@ -2,6 +2,8 @@ from os.path import dirname, realpath
 from pathlib import Path
 from sys import platform
 import ctypes
+import time
+start = time.time_ns()
 _DAY = "15"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
@@ -9,8 +11,6 @@ with open(_INPUT_PATH, 'r') as f:
     lines = [line.replace("\n", "") for line in f.readlines()]
     # extract all starting numbers from the first line (comma separated)
     starting_numbers = [int(nr) for nr in lines[0].split(",")]
-
-
 ####################################################################################################
 def calc_nth_number_slow(n: int) -> int:
     """Calculates the `n`-th spoken number"""
@@ -46,7 +46,7 @@ def calc_nth_number_slow(n: int) -> int:
 
 def calc_nth_number(n: int) -> int:
     # try to use the lightning fast (~20x speedup) C-function (day15.c) compiled as a dynamic library
-    # ("day15.dll" on Windows/ "day15.so" on Linux)
+    # ("day15_win.dll" on Windows/ "day15_linux.so" on Linux)
     try:
         # create type for int array if appropriate length (len(starting_numbers))
         c_int_array = ctypes.c_int * starting_numbers.__len__()
@@ -65,7 +65,7 @@ def calc_nth_number(n: int) -> int:
               "or .so file exists in aoc_2020/code/ named day15_win.dll or day15_linux.so")
         print("The Makefile in the root directory should work for Windows and Linux, if you have cl.exe or gcc "
               "installed")
-        print("Falling back to slow python solution")
+        print("Falling back to slow python-only solution")
         # if something failed, use the slow python version of the function
         result = calc_nth_number_slow(n)
     return result
@@ -79,9 +79,11 @@ def part_b():
     """Part B"""
     return calc_nth_number(30000000)
 
-
-# Print out results
-print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
-print("Part A: " + str(part_a()))
-print("Part B: " + str(part_b()))
-print(28 * "-")
+if __name__ == "__main__":
+    # Print out results
+    print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
+    print("Part A: " + str(part_a()))
+    print("Part B: " + str(part_b()))
+    print(28 * "-")
+    diff = time.time_ns()-start
+    print(str(diff/1000000) + " ms")
