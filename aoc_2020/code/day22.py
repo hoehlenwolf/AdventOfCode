@@ -1,26 +1,34 @@
 from os.path import dirname, realpath
 from pathlib import Path
+from time import time_ns
+
 _DAY = "22"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
-with open(_INPUT_PATH, 'r') as f:
-    lines = [line.replace("\n", "") for line in f.readlines()]
-# Player counter (initialized with -1 because it will be incremented if first Player's deck is found)
-player_counter = -1
+lines = []
 players = []  # decks for the players 1 and 2
-# go through all lines
-for line in lines:
-    # if blank line, skip
-    if line == "":
-        continue
-    # if at start of new deck-definition
-    if line.startswith("Player"):
-        # increment player counter
-        player_counter += 1
-        # append a new, empty deck to 'players'
-        players.append([])
-    else:  # otherwise, line is somewhere inside the deck-definition. Simply append the number in the line to the list
-        players[player_counter].append(int(line))
+
+
+def load_puzzle():
+    global lines, players
+    with open(_INPUT_PATH, 'r') as f:
+        lines = [line.replace("\n", "") for line in f.readlines()]
+    # Player counter (initialized with -1 because it will be incremented if first Player's deck is found)
+    player_counter = -1
+    # go through all lines
+    for line in lines:
+        # if blank line, skip
+        if line == "":
+            continue
+        # if at start of new deck-definition
+        if line.startswith("Player"):
+            # increment player counter
+            player_counter += 1
+            # append a new, empty deck to 'players'
+            players.append([])
+        # otherwise, line is somewhere inside the deck-definition. Simply append the number in the line to the list
+        else:
+            players[player_counter].append(int(line))
 
 
 ####################################################################################################
@@ -118,7 +126,7 @@ def part_a():
         # Player 1 won
         winning_player = player_1
         winner = "Player 1"
-    # construct return string "Player X wins. Score: XXXX"
+    # construct return string "Player X wins. Score: 1234"
     return winner + " wins. Score: " + str(get_score(winning_player))
 
 
@@ -135,8 +143,36 @@ def part_b():
     else:  # otherwise Player 2 won
         return "Player 2 wins. Score: " + str(score)
 
-# Print out results
-print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
-print("Part A: " + str(part_a()))
-print("Part B: " + str(part_b()))
-print(28 * "-")
+
+def run():
+    """Runs this day's solution and returns a tuple
+
+    (result part A,
+    Result part B,
+    time for setup,
+    time for part A,
+    time for part B)
+
+    """
+    # Setup
+    time_start_setup = time_ns()
+    load_puzzle()
+    time_setup = time_ns() - time_start_setup
+
+    # Part A
+    time_start_a = time_ns()
+    result_a = part_a()
+    time_a = time_ns() - time_start_a
+
+    # Part B
+    time_start_b = time_ns()
+    result_b = part_b()
+    time_b = time_ns() - time_start_b
+
+    return result_a, result_b, time_setup, time_a, time_b
+
+
+if __name__ == "__main__":
+    a, b, _, _, _ = run()
+    print("Part A: " + str(a))
+    print("Part B: " + str(b))

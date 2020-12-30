@@ -2,15 +2,23 @@ from os.path import dirname, realpath
 from pathlib import Path
 from sys import platform
 import ctypes
-import time
-start = time.time_ns()
+from time import time_ns
+
 _DAY = "15"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
-with open(_INPUT_PATH, 'r') as f:
-    lines = [line.replace("\n", "") for line in f.readlines()]
-    # extract all starting numbers from the first line (comma separated)
-    starting_numbers = [int(nr) for nr in lines[0].split(",")]
+lines = []
+starting_numbers = []
+
+
+def load_puzzle():
+    global lines, starting_numbers
+    with open(_INPUT_PATH, 'r') as f:
+        lines = [line.replace("\n", "") for line in f.readlines()]
+        # extract all starting numbers from the first line (comma separated)
+        starting_numbers = [int(nr) for nr in lines[0].split(",")]
+
+
 ####################################################################################################
 def calc_nth_number_slow(n: int) -> int:
     """Calculates the `n`-th spoken number"""
@@ -39,7 +47,7 @@ def calc_nth_number_slow(n: int) -> int:
         spoken_numbers[prev_num] = i - 1
         # previously spoken number (for next round) is the difference between the last turn's number (where old
         # 'prev_num' has been spoken) and the turn number in which the old 'prev_num' was spoken *before* that
-        prev_num = (i-1) - previous
+        prev_num = (i - 1) - previous
     # return the n-th number spoken (prev_number for n+1-th turn)
     return prev_num
 
@@ -70,6 +78,7 @@ def calc_nth_number(n: int) -> int:
         result = calc_nth_number_slow(n)
     return result
 
+
 def part_a():
     """Part A"""
     return calc_nth_number(2020)
@@ -79,11 +88,36 @@ def part_b():
     """Part B"""
     return calc_nth_number(30000000)
 
+
+def run():
+    """Runs this day's solution and returns a tuple
+
+    (result part A,
+    Result part B,
+    time for setup,
+    time for part A,
+    time for part B)
+
+    """
+    # Setup
+    time_start_setup = time_ns()
+    load_puzzle()
+    time_setup = time_ns() - time_start_setup
+
+    # Part A
+    time_start_a = time_ns()
+    result_a = part_a()
+    time_a = time_ns() - time_start_a
+
+    # Part B
+    time_start_b = time_ns()
+    result_b = part_b()
+    time_b = time_ns() - time_start_b
+
+    return result_a, result_b, time_setup, time_a, time_b
+
+
 if __name__ == "__main__":
-    # Print out results
-    print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
-    print("Part A: " + str(part_a()))
-    print("Part B: " + str(part_b()))
-    print(28 * "-")
-    diff = time.time_ns()-start
-    print(str(diff/1000000) + " ms")
+    a, b, _, _, _ = run()
+    print("Part A: " + str(a))
+    print("Part B: " + str(b))

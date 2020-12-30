@@ -3,6 +3,7 @@ from enum import Enum
 from os.path import dirname, realpath
 from pathlib import Path
 import numpy as np
+from time import time_ns
 
 _DAY = "20"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
@@ -22,6 +23,7 @@ class Direction(Enum):
 ####################################################################################################
 class Tile:
     """Tile that has an image, methods to rotate and flip it as well as a method to easily get the borders"""
+
     def __init__(self, tile_id: int, tile_image: np.ndarray):
         """Initializes a Tile (constructor) with a given `tile_id` and a `tile_image`"""
         # the original tile-image (puzzle input)
@@ -78,15 +80,6 @@ class Tile:
         """Returns a String-representation of the Tile (it's ID)"""
         return str(self.id_)
 
-    def print(self):
-        """Pretty-prints the Tile (like an actual image)"""
-        res = ""
-        for line in self.image:
-            for pixel in line:
-                res += pixel
-            res += "\n"
-        print(res)
-
     def get_border(self, direction: Direction):
         """Returns the border of the Tile (border specified by `direction`; Direction.UP => upper border etc.)
         with respect to current flip and rotation of the tile"""
@@ -129,31 +122,36 @@ class Tile:
 
 ####################################################################################################
 # load puzzle input
-with open(_INPUT_PATH, 'r') as f:
-    lines = [line.replace("\n", "") for line in f.readlines()]
-tiles = []  # list of tiles
-id_ = -1  # initialize tile-id with -1
-image = []  # initialize tile-image with empty array
-# go through every line
-for line in lines:
-    if line == "":  # if empty line the current Tile's definition has ended
-        # create a Tile from the previously gathered information
-        t = Tile(id_, np.array(image))
-        # and append it to the list of Tiles
-        tiles.append(t)
-    else:  # if not empty line, gather information
-        if line.startswith("Tile"):  # if line begins with "Tile"
-            # extract the tile-id (after the first whitespace without ending ":")
-            id_ = line.split(" ")[1][:-1]
-            # (re-)set image to an empty array
-            image = []
-        else:  # if line is not empty and does not start with "Tile", it contains the current Tile's pixel
-            line_arr = []  # array for one line
-            # append every character in the current line to the 'line_arr'
-            for c in line:
-                line_arr.append(c)
-            # append the 'line_arr' to the Tile's image
-            image.append(line_arr)
+tiles = []
+
+
+def load_puzzle():
+    global tiles
+    with open(_INPUT_PATH, 'r') as f:
+        lines = [line.replace("\n", "") for line in f.readlines()]
+    tiles = []  # list of tiles
+    id_ = -1  # initialize tile-id with -1
+    image = []  # initialize tile-image with empty array
+    # go through every line
+    for line in lines:
+        if line == "":  # if empty line the current Tile's definition has ended
+            # create a Tile from the previously gathered information
+            t = Tile(id_, np.array(image))
+            # and append it to the list of Tiles
+            tiles.append(t)
+        else:  # if not empty line, gather information
+            if line.startswith("Tile"):  # if line begins with "Tile"
+                # extract the tile-id (after the first whitespace without ending ":")
+                id_ = line.split(" ")[1][:-1]
+                # (re-)set image to an empty array
+                image = []
+            else:  # if line is not empty and does not start with "Tile", it contains the current Tile's pixel
+                line_arr = []  # array for one line
+                # append every character in the current line to the 'line_arr'
+                for c in line:
+                    line_arr.append(c)
+                # append the 'line_arr' to the Tile's image
+                image.append(line_arr)
 
 
 ####################################################################################################
@@ -188,6 +186,7 @@ def docks_to(locked: Tile, to_dock: Tile, modify_to_dock: bool) -> bool:
                         to_dock.neighbours[opposing_site] = locked
                         return True  # docking was successful
         return False  # could not dock them together
+
 
 def print_tiles():
     """Prints all Tile's ID in matrix form to represent the order of tiles"""
@@ -295,8 +294,9 @@ def part_a():
                     # if another solo-Tile can dock to them)
                 break  # break out and start over
             solo_index += 1  # if solo-Tile could not be placed, go to the next possible solo-Tile in tiles_solo
-    # print the configuration of Tile-IDs
-    print_tiles()
+    # Optional: print the configuration of Tile-IDs
+    # print_tiles()
+
     # product is 1 (modified later by *= )
     prod = 1
     # loop through all Tiles
@@ -322,7 +322,7 @@ def part_b():
     whole_image = []  # whole_image after stitching the Tiles together
     t_cur_row_beginning = tile  # Tile at the beginning of the current row
     row_counter = 1  # row counter (always start with 1 and ignore the upper border of Tiles)
-    rows, cols = np.shape(t.get_image())  # get dimensions of tile-image
+    rows, cols = np.shape(tile.get_image())  # get dimensions of tile-image
     while t_cur_row_beginning is not None:  # loop through all rows
         whole_row = []  # Stitch together Pixels per row in tile-image for all Tiles in this row
         t_current = t_cur_row_beginning  # current Tile
@@ -348,7 +348,8 @@ def part_b():
             res = find_sea_monster(whole_image)  # look for sea-monsters in whole_image with current orientation
             if res:  # if sea-monster could be found (image was rotated and flipped correctly)
                 for row in whole_image:  # print out the correctly oriented 'whole_image' with marked sea-monsters
-                    print("".join(row))
+                    # print("".join(row))  # Optional
+                    pass
                 # count hashtags that don't belong to a sea-monster ("#" in sea-monster have been replaced by "O")
                 hashtags_not_in_monster = 0
                 for row in whole_image:  # loop through all rows
@@ -358,11 +359,35 @@ def part_b():
                 return hashtags_not_in_monster  # return counter
 
 
-# Print out results
-print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
-# fetch results because part_a() and part_b() will print a lot, final result will be at the bottom this way)
-res_a = str(part_a())
-res_b = str(part_b())
-print("Part A: " + res_a)
-print("Part B: " + res_b)
-print(28 * "-")
+def run():
+    """Runs this day's solution and returns a tuple
+
+    (result part A,
+    Result part B,
+    time for setup,
+    time for part A,
+    time for part B)
+
+    """
+    # Setup
+    time_start_setup = time_ns()
+    load_puzzle()
+    time_setup = time_ns() - time_start_setup
+
+    # Part A
+    time_start_a = time_ns()
+    result_a = part_a()
+    time_a = time_ns() - time_start_a
+
+    # Part B
+    time_start_b = time_ns()
+    result_b = part_b()
+    time_b = time_ns() - time_start_b
+
+    return result_a, result_b, time_setup, time_a, time_b
+
+
+if __name__ == "__main__":
+    a, b, _, _, _ = run()
+    print("Part A: " + str(a))
+    print("Part B: " + str(b))

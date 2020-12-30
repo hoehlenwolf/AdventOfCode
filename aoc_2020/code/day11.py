@@ -1,20 +1,26 @@
-import numpy
 from os.path import dirname, realpath
 from pathlib import Path
 from copy import deepcopy
+from time import time_ns
 
 _DAY = "11"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
-with open(_INPUT_PATH, 'r') as f:
-    lines = [line.replace("\n", "") for line in f.readlines()]
-row_counter = 0
+lines = []
 seats = []
-for line in lines:
-    seats.append([])
-    for seat in line:
-        seats[row_counter].append(seat)
-    row_counter += 1
+
+
+def load_puzzle():
+    global lines, seats
+    with open(_INPUT_PATH, 'r') as f:
+        lines = [line.replace("\n", "") for line in f.readlines()]
+    row_counter = 0
+    for line in lines:
+        seats.append([])
+        for seat in line:
+            seats[row_counter].append(seat)
+        row_counter += 1
+
 
 ####################################################################################################
 def count_adjacent(seat_config: list, i: int, j: int, seat_state: chr) -> int:
@@ -34,6 +40,8 @@ def count_adjacent(seat_config: list, i: int, j: int, seat_state: chr) -> int:
 
 
 directions_to_check = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+
+
 def count_visible_seats(seat_config: list, i: int, j: int, seat_state: chr) -> int:
     # offsets
     # 1 2 3
@@ -57,16 +65,17 @@ def count_visible_seats(seat_config: list, i: int, j: int, seat_state: chr) -> i
         if not broken and seat_config[row][col] == seat_state:
             counter += 1
 
-
-
     return counter
 
+
 gcounter = 0
+
+
 def next_step(previous: list, count_adjacent_function, tolerance_occupied_nearby: int) -> (list, int):
     """Return the next step calculated based on the `previous` step provided"""
     global gcounter
     result = deepcopy(previous)
-    gcounter +=1
+    gcounter += 1
     seats_changed = 0
     for row in range(0, previous.__len__()):
         for col in range(0, previous[row].__len__()):
@@ -83,8 +92,8 @@ def next_step(previous: list, count_adjacent_function, tolerance_occupied_nearby
     return result, seats_changed
 
 
-def print_seats(seats):
-    for row in seats:
+def print_seats(seats_to_print):
+    for row in seats_to_print:
         row_str = ""
         for seat in row:
             row_str += seat
@@ -96,7 +105,7 @@ def calculate_until_stable(count_adjacent_function, max_nearby_occupied: int) ->
     seat_configuration = seats
     seats_changed = 1
     while seats_changed != 0:
-        #print_seats(seat_configuration)
+        # print_seats(seat_configuration)
         seat_configuration, seats_changed = next_step(seat_configuration, count_adjacent_function, max_nearby_occupied)
     occupied_seats = 0
     for row in seat_configuration:
@@ -104,6 +113,7 @@ def calculate_until_stable(count_adjacent_function, max_nearby_occupied: int) ->
             if curr_seat == "#":
                 occupied_seats += 1
     return occupied_seats
+
 
 def part_a():
     """Part A"""
@@ -115,9 +125,35 @@ def part_b():
     return calculate_until_stable(count_visible_seats, 5)
 
 
-# Print out results
-print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
-print("Part A: " + str(part_a()))
-print("Part B: " + str(part_b()))
-print(28 * "-")
+def run():
+    """Runs this day's solution and returns a tuple
 
+    (result part A,
+    Result part B,
+    time for setup,
+    time for part A,
+    time for part B)
+
+    """
+    # Setup
+    time_start_setup = time_ns()
+    load_puzzle()
+    time_setup = time_ns() - time_start_setup
+
+    # Part A
+    time_start_a = time_ns()
+    result_a = part_a()
+    time_a = time_ns() - time_start_a
+
+    # Part B
+    time_start_b = time_ns()
+    result_b = part_b()
+    time_b = time_ns() - time_start_b
+
+    return result_a, result_b, time_setup, time_a, time_b
+
+
+if __name__ == "__main__":
+    a, b, _, _, _ = run()
+    print("Part A: " + str(a))
+    print("Part B: " + str(b))

@@ -1,27 +1,34 @@
 from os.path import dirname, realpath
 from pathlib import Path
+from time import time_ns
+
 _DAY = "06"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
-with open(_INPUT_PATH, 'r') as f:
-    lines = [line.replace("\n", "") for line in f.readlines()]
-# convert read lines into 2-d-array of groups with each group being an array of answers
+lines = []
 groups = [[]]
-group_counter = 0
-for line in lines:
-    # if new group
-    if line == "":
-        # add another group
-        groups.append([])
-        # increment group counter
-        group_counter += 1
-    else:
-        # otherwise append answer to current group
-        groups[group_counter].append(line)
+
+
+def load_puzzle():
+    global lines, groups
+    with open(_INPUT_PATH, 'r') as f:
+        lines = [line.replace("\n", "") for line in f.readlines()]
+    # convert read lines into 2-d-array of groups with each group being an array of answers
+    group_counter = 0
+    for line in lines:
+        # if new group
+        if line == "":
+            # add another group
+            groups.append([])
+            # increment group counter
+            group_counter += 1
+        else:
+            # otherwise append answer to current group
+            groups[group_counter].append(line)
 
 
 ####################################################################################################
-def check_question_in_all_answers(question : chr, group : list) -> bool:
+def check_question_in_all_answers(question: chr, group: list) -> bool:
     """Checks if *everyone* in the group answered "yes" to given question"""
     # loop through all answers in the given group
     for answer in group:
@@ -30,6 +37,8 @@ def check_question_in_all_answers(question : chr, group : list) -> bool:
             return False
     # if this statement is reached, everyone in the group answered "yes"es to the given question
     return True
+
+
 def part_a():
     """Part A"""
     # sum of question that were answered "yes" by *anyone*
@@ -67,8 +76,35 @@ def part_b():
     return sum_yes
 
 
-# Print out results
-print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
-print("Part A: " + str(part_a()))
-print("Part B: " + str(part_b()))
-print(28 * "-")
+def run():
+    """Runs this day's solution and returns a tuple
+
+    (result part A,
+    Result part B,
+    time for setup,
+    time for part A,
+    time for part B)
+
+    """
+    # Setup
+    time_start_setup = time_ns()
+    load_puzzle()
+    time_setup = time_ns() - time_start_setup
+
+    # Part A
+    time_start_a = time_ns()
+    result_a = part_a()
+    time_a = time_ns() - time_start_a
+
+    # Part B
+    time_start_b = time_ns()
+    result_b = part_b()
+    time_b = time_ns() - time_start_b
+
+    return result_a, result_b, time_setup, time_a, time_b
+
+
+if __name__ == "__main__":
+    a, b, _, _, _ = run()
+    print("Part A: " + str(a))
+    print("Part B: " + str(b))

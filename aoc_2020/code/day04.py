@@ -1,24 +1,32 @@
 import re
 from pathlib import Path
 from os.path import dirname, realpath
+from time import time_ns
+
 _DAY = "04"
 _INPUT_PATH = Path(dirname(realpath(__file__))).parent / Path("inputs") / Path("day" + _DAY + "_input.txt")
 # load puzzle input
-with open(_INPUT_PATH, 'r') as f:
-    lines = [line.replace("\n", "") for line in f.readlines()]
-    passports = []
-    pass_counter = 0
-    for i in range(0, lines.__len__()):
-        if lines[i] == "":  # if blank line
-            pass_counter += 1  # "add" new passport
+lines = []
+passports = []
 
-        else:
-            if passports.__len__() <= pass_counter:  # make sure dict passports[pass_counter] exists
-                passports.append({})
-            for key_value in lines[i].split(" "):  # split into key:value pairs and split them into key and value
-                key = key_value.split(":")[0]
-                value = key_value.split(":")[1]
-                passports[pass_counter][key] = value  # add them to the dict
+
+def load_puzzle():
+    global lines, passports
+    with open(_INPUT_PATH, 'r') as f:
+        lines = [line.replace("\n", "") for line in f.readlines()]
+
+        pass_counter = 0
+        for i in range(0, lines.__len__()):
+            if lines[i] == "":  # if blank line
+                pass_counter += 1  # "add" new passport
+
+            else:
+                if passports.__len__() <= pass_counter:  # make sure dict passports[pass_counter] exists
+                    passports.append({})
+                for key_value in lines[i].split(" "):  # split into key:value pairs and split them into key and value
+                    key = key_value.split(":")[0]
+                    value = key_value.split(":")[1]
+                    passports[pass_counter][key] = value  # add them to the dict
 
 
 ####################################################################################################
@@ -92,8 +100,35 @@ def part_b():
     return counter
 
 
-# Print out results
-print(10 * "-" + " Day " + _DAY + " " + 10 * "-")
-print("Part A: " + str(part_a()))
-print("Part B: " + str(part_b()))
-print(28 * "-")
+def run():
+    """Runs this day's solution and returns a tuple
+
+    (result part A,
+    Result part B,
+    time for setup,
+    time for part A,
+    time for part B)
+
+    """
+    # Setup
+    time_start_setup = time_ns()
+    load_puzzle()
+    time_setup = time_ns() - time_start_setup
+
+    # Part A
+    time_start_a = time_ns()
+    result_a = part_a()
+    time_a = time_ns() - time_start_a
+
+    # Part B
+    time_start_b = time_ns()
+    result_b = part_b()
+    time_b = time_ns() - time_start_b
+
+    return result_a, result_b, time_setup, time_a, time_b
+
+
+if __name__ == "__main__":
+    a, b, _, _, _ = run()
+    print("Part A: " + str(a))
+    print("Part B: " + str(b))
