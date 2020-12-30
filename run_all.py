@@ -95,7 +95,7 @@ def run_all(year_to_run: int):
         for avg_day in averaged_time_values:
             log("Day " + avg_day[0] + ":" + "{:10.1f}".format(avg_day[1]) + 10 * " " + "{:10.1f}".format(
                 avg_day[2]) + 10 * " " + "{:10.1f}".format(avg_day[3]))
-        log("Total execution time: " + "{:10.1f}".format(total_time) + " ms on average (" + str(
+        log("\nTotal execution time: " + "{:10.1f}".format(total_time) + " ms on average (" + str(
             ITERATIONS[year_to_run]) + " iterations)")
         create_runtime_vis(averaged_time_values, year_to_run)
         create_readme()
